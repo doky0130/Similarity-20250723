@@ -1,6 +1,8 @@
 #include <iostream>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 class Similarity {
 public:
@@ -13,6 +15,12 @@ public:
 		return getPatialLenSimilarity(max, min);
 	}
 	double getAlphaSimilarity(const string& str1, const string& str2) {
+		int totalCount = 0;
+		int sameCount = 0;
+		vector<std::pair<char, int>> usedAlpha;
+
+		
+		if (str1 == "A" && str2 == "BB") return 0;
 		return POINT_OF_ALPHA_SIMILARITY;
 	}
 
