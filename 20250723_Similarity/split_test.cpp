@@ -16,8 +16,8 @@ public:
 	double ret;
 
 	void checkTextLength(TestTarget target) {
-		ret = similarity.checkLenSimilarity(target.str1, target.str2);
-		EXPECT_EQ(target.score, ret);
+		ret = similarity.getLenSimilarity(target.str1, target.str2);
+		EXPECT_DOUBLE_EQ(target.score, ret);
 	}
 };
 
@@ -34,10 +34,10 @@ TEST_F(SimilarityFixture, CheckTextLength) {
 
 TEST_F(SimilarityFixture, CheckTextLengthAssertion) {
 	try {
-		ret = similarity.checkLenSimilarity("A", "");
+		ret = similarity.getLenSimilarity("A", "");
 		FAIL();
 	}
-	catch (const exception& e) {
+	catch (const std::exception& e) {
 
 	}
 }
