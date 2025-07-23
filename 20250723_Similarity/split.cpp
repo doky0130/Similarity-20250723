@@ -12,8 +12,13 @@ public:
 
 		return getPatialLenSimilarity(max, min);
 	}
+	double getAlphaSimilarity(const string& str1, const string& str2) {
+		return POINT_OF_ALPHA_SIMILARITY;
+	}
+
 private:
 	const int POINT_OF_LEN_SIMILARITY = 60;
+	const int POINT_OF_ALPHA_SIMILARITY = 40;
 
 	void lenAssertion(int min) {
 		if (min < 1) { throw std::length_error("String length must be larger than 0"); }

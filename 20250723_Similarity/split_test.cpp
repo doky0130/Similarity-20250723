@@ -12,6 +12,11 @@ public:
 		ret = similarity.getLenSimilarity(str1, str2);
 		EXPECT_DOUBLE_EQ(score, ret);
 	}
+
+	void checkTextAlpha(double score, string str1, string str2) {
+		ret = similarity.getAlphaSimilarity(str1, str2);
+		EXPECT_DOUBLE_EQ(score, ret);
+	}
 };
 
 TEST_F(SimilarityFixture, CheckTextLength) {
@@ -19,6 +24,13 @@ TEST_F(SimilarityFixture, CheckTextLength) {
 	checkTextLength(0, "A", "BB");
 	checkTextLength(20, "AAABB", "BAA");
 	checkTextLength(30, "AA", "AAE");
+}
+
+TEST_F(SimilarityFixture, CheckTextAlphabet) {
+	checkTextAlpha(40, "ASD", "DSA");
+//	checkTextAlpha(0, "A", "BB");
+//	checkTextAlpha(40, "AAABB", "BAA");
+//	checkTextAlpha(20, "AA", "AAE");
 }
 
 int main() {
