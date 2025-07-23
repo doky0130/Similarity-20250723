@@ -3,23 +3,36 @@
 
 using namespace testing;
 
+struct TestTarget {
+	string str1;
+	string str2;
+	double score;
+};
+
 class SimilarityFixture : public Test {
 public:
 	Similarity similarity;
-	float ret;
+	TestTarget target;
+	double ret;
+
+	void checkTextLength(TestTarget target) {
+		ret = similarity.checkLenSimilarity(target.str1, target.str2);
+		EXPECT_EQ(target.score, ret);
+	}
 };
 
 TEST_F(SimilarityFixture, CheckTextLength) {
-	ret = similarity.checkLenSimilarity("ASD", "DSA");
-	EXPECT_EQ(60, ret);
+	target = { "ASD", "DSA", 60 };
+	checkTextLength(target);
+
+	target = { "A", "BB", 0 };
+	checkTextLength(target);
+	
+	target = { "AAABB", "BAA", 20 };
+	checkTextLength(target);	
 }
 
-TEST_F(SimilarityFixture, CheckTextLength2) {
-	ret = similarity.checkLenSimilarity("A", "BB");
-	EXPECT_EQ(0, ret);
-}
-
-TEST_F(SimilarityFixture, CheckTextLength3) {
+TEST_F(SimilarityFixture, CheckTextLengthAssertion) {
 	try {
 		ret = similarity.checkLenSimilarity("A", "");
 		FAIL();
@@ -28,11 +41,6 @@ TEST_F(SimilarityFixture, CheckTextLength3) {
 
 	}
 }
-TEST_F(SimilarityFixture, CheckTextLength4) {
-	ret = similarity.checkLenSimilarity("AAABB", "BAA");
-	EXPECT_EQ(20, ret);
-}
-
 
 int main() {
 	InitGoogleMock();

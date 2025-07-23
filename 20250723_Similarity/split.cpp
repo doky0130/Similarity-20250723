@@ -19,6 +19,7 @@ public:
 	}
 private:
 	const int POINT_OF_LEN_SIMILARITY = 60;
+
 	void lenAssertion(int len1, int len2) {
 		if (len1 < 1) { throw length_error("String length must be larger than 0"); }
 		if (len2 < 1) { throw length_error("String length must be larger than 0"); }
