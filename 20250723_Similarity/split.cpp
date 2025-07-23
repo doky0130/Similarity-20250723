@@ -15,13 +15,12 @@ public:
 		return getPatialLenSimilarity(max, min);
 	}
 	double getAlphaSimilarity(const string& str1, const string& str2) {
-		int usedChar1[26];
-		int usedChar2[26];
+		double totalCnt = getTotalCnt(str1, str2);
+		double sameCnt = getSameCnt(str1, str2);
 
-		checkUsedAlpha(str1, usedChar1);
-		checkUsedAlpha(str2, usedChar2);
+		double score = sameCnt / totalCnt * POINT_OF_ALPHA_SIMILARITY;
 
-		return calAlphaSimilarity(usedChar1, usedChar2);
+		return score;
 	}
 
 private:
@@ -39,27 +38,43 @@ private:
 		return score;
 	}
 
-	void checkUsedAlpha(string str, int used[26]) {
+	double getTotalCnt(const string& str1, const string& str2) {
+		int usedChar1[26];
+		int usedChar2[26];
+
+		checkUsedAlpha(str1, usedChar1);
+		checkUsedAlpha(str2, usedChar2);
+
+		double totalCnt = 0;
+		for (int i = 0; i < 26; i++) {
+			if (usedChar1[i] > 0 || usedChar2[i] > 0) {
+				totalCnt++;
+			}		
+		}
+		return totalCnt;
+	}
+
+	double getSameCnt(const string& str1, const string& str2) {
+		int usedChar1[26];
+		int usedChar2[26];
+
+		checkUsedAlpha(str1, usedChar1);
+		checkUsedAlpha(str2, usedChar2);
+
+		double sameCnt = 0;
+		for (int i = 0; i < 26; i++) {
+			if (usedChar1[i] > 0 && usedChar2[i] > 0) {
+				sameCnt++;
+			}
+		}
+		return sameCnt;
+	}
+
+	void checkUsedAlpha(const string& str, int used[26]) {
 		std::fill_n(used, 26, 0);
 
 		for (auto ch : str) {
 			used[ch - 'A'] += 1;
 		}
-	}
-
-	double calAlphaSimilarity(int usedChar1[26], int usedChar2[26]) {
-		double totalCnt = 0;
-		double sameCnt = 0;
-
-		for (int i = 0; i < 26; i++) {
-			if (usedChar1[i] == 0 && usedChar2[i] == 0) continue;
-			if (usedChar1[i] > 0 && usedChar2[i] > 0) {
-				sameCnt++;
-			}
-			totalCnt++;
-		}
-
-		double score = sameCnt / totalCnt * 40;
-		return score;
 	}
 };
