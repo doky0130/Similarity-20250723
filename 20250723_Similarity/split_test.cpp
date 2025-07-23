@@ -17,7 +17,7 @@ public:
 
 	void checkTextLength(TestTarget target) {
 		ret = similarity.checkLenSimilarity(target.str1, target.str2);
-		EXPECT_EQ(target.score, ret);
+		EXPECT_DOUBLE_EQ(target.score, ret);
 	}
 };
 
