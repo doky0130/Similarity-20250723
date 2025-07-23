@@ -3,8 +3,10 @@
 
 using namespace testing;
 
-TEST(TS, TC1) {
-	EXPECT_EQ(1, 1);
+TEST(TS, CheckTextLength) {
+	Similarity similarity;
+	float ret = similarity.checkLenSimilarity("ASD", "DSA");
+	EXPECT_EQ(60, ret);
 }
 
 int main() {
