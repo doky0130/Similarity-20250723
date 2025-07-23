@@ -15,13 +15,36 @@ public:
 		return getPatialLenSimilarity(max, min);
 	}
 	double getAlphaSimilarity(const string& str1, const string& str2) {
-		int totalCount = 0;
-		int sameCount = 0;
-		vector<std::pair<char, int>> usedAlpha;
+		double totalCnt = 0;
+		double sameCnt = 0;
+		int usedChar1[26];
+		int usedChar2[26];
+
+		std::fill_n(usedChar1, 26, 0);
+		std::fill_n(usedChar2, 26, 0);
+
+		for (auto ch : str1) {
+			if (ch >= 'A' && ch <= 'Z') usedChar1[ch - 'A'] += 1;
+			if (ch >= 'a' && ch <= 'z') usedChar1[ch - 'a'] += 1;
+		}
+
+		for (auto ch : str2) {
+			if (ch >= 'A' && ch <= 'Z') usedChar2[ch - 'A'] += 1;
+			if (ch >= 'a' && ch <= 'z') usedChar2[ch - 'a'] += 1;
+		}
 
 		
-		if (str1 == "A" && str2 == "BB") return 0;
-		return POINT_OF_ALPHA_SIMILARITY;
+		for (int i = 0; i < 26; i++) {
+			if (usedChar1[i] == 0 && usedChar2[i] == 0) continue;
+			if (usedChar1[i] > 0 && usedChar2[i] > 0) {
+				sameCnt++;
+			}
+			totalCnt++;
+		}
+
+		double score = sameCnt / totalCnt * 40;
+
+		return score;
 	}
 
 private:

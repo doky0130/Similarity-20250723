@@ -30,7 +30,7 @@ TEST_F(SimilarityFixture, CheckTextAlphabet) {
 	checkTextAlpha(40, "ASD", "DSA");
 	checkTextAlpha(0, "A", "BB");
 	checkTextAlpha(40, "AAABB", "BAA");
-//	checkTextAlpha(20, "AA", "AAE");
+	checkTextAlpha(20, "AA", "AAE");
 }
 
 int main() {
