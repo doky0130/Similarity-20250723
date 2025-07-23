@@ -18,6 +18,7 @@ TEST_F(SimilarityFixture, CheckTextLength) {
 	checkTextLength(60, "ASD", "DSA");
 	checkTextLength(0, "A", "BB");
 	checkTextLength(20, "AAABB", "BAA");
+	checkTextLength(30, "AA", "AAE");
 }
 
 int main() {
