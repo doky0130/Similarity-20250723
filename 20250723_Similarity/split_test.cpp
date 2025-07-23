@@ -9,6 +9,12 @@ TEST(TS, CheckTextLength) {
 	EXPECT_EQ(60, ret);
 }
 
+TEST(TS, CheckTextLength2) {
+	Similarity similarity;
+	float ret = similarity.checkLenSimilarity("A", "BB");
+	EXPECT_EQ(0, ret);
+}
+
 int main() {
 	InitGoogleMock();
 	return RUN_ALL_TESTS();
