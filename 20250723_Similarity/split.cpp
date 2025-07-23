@@ -8,14 +8,19 @@ public:
 		int len1 = str1.length();
 		int len2 = str2.length();
 
-		if (len1 < 1) { throw length_error("String length must be larger than 0"); }
-		if (len2 < 1) { throw length_error("String length must be larger than 0"); }
-		
-		double gap = abs(len1 - len2);
-		double score = (1 - gap / min(len1, len2)) * 60;
+		lenAssertion(len1, len2);
 
-		if (max(len1, len2) >= 2 * min(len1, len2)) score = 0;
+		double gap = abs(len1 - len2);
+		double score = (1 - gap / min(len1, len2)) * POINT_OF_LEN_SIMILARITY;
+
+		if (score <= 0) score = 0;
 
 		return score;
+	}
+private:
+	const int POINT_OF_LEN_SIMILARITY = 60;
+	void lenAssertion(int len1, int len2) {
+		if (len1 < 1) { throw length_error("String length must be larger than 0"); }
+		if (len2 < 1) { throw length_error("String length must be larger than 0"); }
 	}
 };
